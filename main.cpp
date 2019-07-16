@@ -13,7 +13,7 @@ typedef vector<int> scoreV;
 
 
 
-void percolate_up (scoreV arr, int i) {
+void percolate_up (scoreV& arr, int i) {
 	int p = i/2;
 	int current = i;
 	while (current > 1 && arr[p] < arr[current]){
@@ -25,7 +25,7 @@ void percolate_up (scoreV arr, int i) {
 	}
 }
 
-void percolate_down(scoreV arr, int i, int length){
+void percolate_down(scoreV& arr, int i, int length){
 	int leftchild = i*2;
 	int rightchild = i*2 + 1;
 	int maxindex = i;
@@ -41,7 +41,7 @@ void percolate_down(scoreV arr, int i, int length){
 	}
 }
 
-void build_heap(scoreV arr, int length){
+void build_heap(scoreV& arr, int length){
 	int start_index = (length/2);
 
 	for (int i = start_index; i >= 1; i--){ 
@@ -49,7 +49,7 @@ void build_heap(scoreV arr, int length){
 	} 
 }
 
-int get_max(scoreV arr, int length){
+int get_max(scoreV& arr, int length){
 	int max = arr[1];
 	arr[1] = arr[length];
 	percolate_down(arr, 1, length-1);
@@ -105,7 +105,7 @@ int main (int argv, char** argc) {
 	}
 
 	int maxscore = 0;
-	string maxid = NULL;
+	string maxid = "All the students have less than " + to_string(k) +" scores";
 
 	for (int i = 0; i < mainV.size(); i++){
 		int vec_length = mainV[i].second.size() - 1;
@@ -124,14 +124,5 @@ int main (int argv, char** argc) {
 
 	}
 
-	 cout << maxid << " with " << maxscore;
-
-	
-		for (int i = 0; i < mainV.size(); i++){
-			cout << "In the index " << i << " of the mainV. For " << mainV[i].first << ": ";
-			for (int j = 0; j < mainV[i].second.size(); j++){
-				cout << mainV[i].second[j] << "  ";
-			}
-			cout << endl;
-		}
+	 cout << maxid << endl;;
 }
